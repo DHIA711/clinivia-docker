@@ -25,7 +25,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Docker
       - DOTNET_RUNNING_IN_CONTAINER=true
     ports:
-      - "8080:8080" # L'application web écoute sur le port 8080 interne, mappé sur 8080 externe
+      - "8085:8080" # L'application web écoute sur le port 8080 interne, mappé sur 8080 externe
     depends_on:
       - sqlserver
     networks:

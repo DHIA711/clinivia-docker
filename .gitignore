@@ -1,0 +1,8 @@
+#.net
+clinivia_backend-master/clinivia_backend/bin/
+
+
+#Angular
+clinivia_frontend-master/.angular/
+clinivia_frontend-master/dist/
+clinivia_frontend-master/node_modules/

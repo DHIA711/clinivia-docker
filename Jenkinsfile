@@ -8,7 +8,7 @@ pipeline {
           agent any
           stages {
 
-          stage('Build Image Docker Backend') {
+          stage('Build Docker Image Backend') {
             steps {
                 sh 'docker build -t sipacademy2024/clinivia_backend:latest ${dotnetF}'
             }
@@ -29,7 +29,7 @@ pipeline {
 
           }
 
-           stage('Build Image Docker Frontend') {
+           stage('Build Docker Image Frontend') {
             steps {
                 sh 'docker build -t sipacademy2024/clinivia_frontend:latest ${angularF}'
             }

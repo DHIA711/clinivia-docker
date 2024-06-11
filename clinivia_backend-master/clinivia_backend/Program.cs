@@ -12,7 +12,6 @@ if (isDocker)
     builder.Configuration.AddJsonFile("appsettings.Docker.json", optional: true, reloadOnChange: true);
 }
 
-// Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -52,6 +51,5 @@ public static class PrepDb
     private static void SeedData(ApplicationContext context)
     {
         context.Database.Migrate();
-        // Seed initial data if necessary
     }
 }

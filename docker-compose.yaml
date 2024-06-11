@@ -6,8 +6,8 @@ services:
     environment:
       SA_PASSWORD: "Passw0rd123"
       ACCEPT_EULA: "Y"
-    ports:
-      - "1433:1433"
+    # ports:
+    #   - "1433:1433"
     networks:
       - clinivia-network
 
@@ -20,7 +20,7 @@ services:
       - clinivia-network  
 
   webapi:
-    image: clinivia_backend:latest
+    image: sipacademy2024/clinivia_backend:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - DOTNET_RUNNING_IN_CONTAINER=true
@@ -32,7 +32,7 @@ services:
       - clinivia-network
 
   frontend:
-    image: clinivia_frontend:latest
+    image: sipacademy2024/clinivia_frontend:latest
     ports:
       - "90:80" # Le frontend écoute sur le port 80 interne, mappé sur 4200 externe
     depends_on:

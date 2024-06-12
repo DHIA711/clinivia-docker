@@ -20,10 +20,10 @@ services:
       - clinivia-network  
 
   webapi:
-    image: sipacademy2024/clinivia_backend:latest
+    image: clinivia_backend:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
-      - DOTNET_RUNNING_IN_CONTAINER=true
+      #- DOTNET_RUNNING_IN_CONTAINER=true
     ports:
       - "8085:8080" # L'application web écoute sur le port 8080 interne, mappé sur 8080 externe
     depends_on:
@@ -32,7 +32,7 @@ services:
       - clinivia-network
 
   frontend:
-    image: sipacademy2024/clinivia_frontend:latest
+    image: clinivia_frontend:latest
     ports:
       - "90:80" # Le frontend écoute sur le port 80 interne, mappé sur 4200 externe
     depends_on:

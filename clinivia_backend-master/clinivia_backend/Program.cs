@@ -3,15 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Déterminer si nous sommes en environnement Docker
-var isDocker = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+// Déterminer l'environnement ASP.NET Core
+var environment = builder.Environment.EnvironmentName;
 
 // Charger les configurations supplémentaires si nécessaire
-if (isDocker)
+if (environment == "Docker")
 {
     builder.Configuration.AddJsonFile("appsettings.Docker.json", optional: true, reloadOnChange: true);
 }
-
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -25,11 +24,12 @@ builder.Services.AddCors(options => {
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment() || isDocker)
+if (app.Environment.IsDevelopment() || environment == "Docker")
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseCors("CORSPolicy");
 app.UseAuthorization();
 app.MapControllers();

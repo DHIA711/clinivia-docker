@@ -15,10 +15,16 @@ if (environment == "Docker")
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ApplicationContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("connString")));
+builder.Services.AddDbContext<ApplicationContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("connString")));
 
-builder.Services.AddCors(options => {
-    options.AddPolicy("CORSPolicy", builder => builder.AllowAnyMethod().AllowAnyHeader().AllowCredentials().SetIsOriginAllowed((hosts) => true));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CORSPolicy", builder =>
+        builder.AllowAnyMethod()
+               .AllowAnyHeader()
+               .AllowCredentials()
+               .SetIsOriginAllowed((hosts) => true));
 });
 
 var app = builder.Build();
@@ -34,7 +40,10 @@ app.UseCors("CORSPolicy");
 app.UseAuthorization();
 app.MapControllers();
 
-PrepDb.PrepPopulation(app); // Apply migrations
+if (environment == "Docker")
+{
+    PrepDb.PrepPopulation(app); // Apply migrations only in Docker environment
+}
 
 app.Run();
 
@@ -53,6 +62,5 @@ public static class PrepDb
         context.Database.Migrate();
     }
 }
-
 
 

@@ -20,7 +20,7 @@ services:
       - clinivia-network  
 
   webapi:
-    image: clinivia_backend:latest
+    image: sipacademy2024/clinivia_backend:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
     ports:
@@ -31,7 +31,7 @@ services:
       - clinivia-network
 
   frontend:
-    image: clinivia_frontend:latest
+    image: sipacademy2024/clinivia_frontend:latest
     ports:
       - "90:80" 
     depends_on:
@@ -45,4 +45,3 @@ networks:
 volumes:
   sqlserver-data:
 
-  

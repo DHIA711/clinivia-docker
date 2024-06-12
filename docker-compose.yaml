@@ -15,7 +15,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - "8081:8080" # Adminer écoute sur le port 8080 interne, mappé sur 8081 externe pour éviter les conflits
+      - "8081:8080" 
     networks:
       - clinivia-network  
 
@@ -23,9 +23,8 @@ services:
     image: clinivia_backend:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
-      #- DOTNET_RUNNING_IN_CONTAINER=true
     ports:
-      - "8085:8080" # L'application web écoute sur le port 8080 interne, mappé sur 8080 externe
+      - "8085:8080" 
     depends_on:
       - sqlserver
     networks:
@@ -34,7 +33,7 @@ services:
   frontend:
     image: clinivia_frontend:latest
     ports:
-      - "90:80" # Le frontend écoute sur le port 80 interne, mappé sur 4200 externe
+      - "90:80" 
     depends_on:
       - webapi
     networks:
